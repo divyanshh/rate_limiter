@@ -56,7 +56,7 @@ To run the code, run the simulation.py file
                         "timestamp1": "no of remaining messages",
                         "timestamp2": "no of remaining messages" 
                     }, 
-                    "Sessional receive:" {
+                    "Sessional receive": {
                         "timestamp1": "no of remaining messages",
                         "timestamp2": "no of remaining messages" 
                     }, 
