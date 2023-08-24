@@ -45,11 +45,13 @@ To run the code, run the simulation.py file
 
 ## LLD
 
-1. rate_limiter_helper_abc.py - Interface of helper
+1. rate_limiter_helper_abc.py - Interface of helper, will help us switch b/w helper algos
 2. rate_limiter_helper.py - Implements helper function
    1. Implements the algo to use the rates from other queues if it's not being used
    2. For eg, within the first second when all of the non sessional rates have been used and there are no inbound sessional messages, we use their limit to send out non sessional messages, so we utilise the whole 250 limit
-2. rate_limiter_abc.py - Interface of rate limiter
+   3. We could face some cases of starvation in this case but we utilise our limit to the fullest
+   4. If we want to set hard limits on each queue, we can implement a new helper algo and switch to it
+2. rate_limiter_abc.py - Interface of rate limiter, will help us switch b/w rate limiting algos
 2. rate_limiter.py - Implements rate limiter
    1. We implement this using a window of 1 second (For bigger timeframes we can use sliding windows, but 1s is too less to implement a sliding window)
    2. For each client we have a dictionary of
