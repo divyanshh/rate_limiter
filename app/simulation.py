@@ -11,7 +11,9 @@ def simulate(limiter: IRateLimiter, rate_limit_helper: IRateLimitHelper):
     end_time = time.time() + 300  # Simulate for 5 minutes
     while time.time() < end_time:
         client_id = random.choice(list(client_rates.keys()))
-        message_type = random.choice(["Non sessional", "Sessional receive", "Sessional send"])
+        message_type = random.choice(
+            ["Non sessional", "Sessional receive", "Sessional send"]
+        )
         rate_limit_helper.helper(limiter, client_id, message_type)
         time.sleep(0)  # Simulate a fraction of a second
 

@@ -10,8 +10,10 @@ class RateLimiter(IRateLimiter):
 
     def can_send(self, client_id, message_type):
         current_second = int(time.time())
-        total_requests = sum(self.clients[client_id][message_type][timestamp] for timestamp in
-                             range(current_second - 1, current_second + 1))
+        total_requests = sum(
+            self.clients[client_id][message_type][timestamp]
+            for timestamp in range(current_second - 1, current_second + 1)
+        )
         limit = self.limits[client_id][message_type]
         return total_requests < limit
 

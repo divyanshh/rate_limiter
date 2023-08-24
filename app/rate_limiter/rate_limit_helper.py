@@ -3,7 +3,6 @@ from rate_limiter.rate_limit_helper_abc import IRateLimitHelper
 
 
 class RateLimitHelper(IRateLimitHelper):
-
     def helper(self, limiter, client_id, message_type):
         if limiter.can_send(client_id, message_type):
             limiter.add_request(client_id, message_type)
@@ -13,7 +12,9 @@ class RateLimitHelper(IRateLimitHelper):
             rate_limit_used = False
             for queue in remaining_queues:
                 if limiter.can_send(client_id, queue):
-                    print(f"Using rate limit from {queue} for Client {client_id} - {message_type}")
+                    print(
+                        f"Using rate limit from {queue} for Client {client_id} - {message_type}"
+                    )
                     limiter.add_request(client_id, queue)
                     rate_limit_used = True
                     break
