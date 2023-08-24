@@ -1,8 +1,9 @@
 import time
 from collections import defaultdict
+from rate_limiter.rate_limiter_abc import IRateLimiter
 
 
-class RateLimiter:
+class RateLimiter(IRateLimiter):
     def __init__(self, limits):
         self.limits = limits
         self.clients = defaultdict(lambda: defaultdict(lambda: defaultdict(int)))

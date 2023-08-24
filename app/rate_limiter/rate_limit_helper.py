@@ -1,17 +1,10 @@
-import time
-import random
-from rate_limiter import RateLimiter
-from client_rates import client_rates
-from queues import get_remaining_queues, print_queue_status
+from ..queues import get_remaining_queues, print_queue_status
+from rate_limiter.rate_limit_helper_abc import IRateLimitHelper
 
-limiter = RateLimiter(client_rates)
 
-def simulate():
-    end_time = time.time() + 300  # Simulate for 5 minutes
-    while time.time() < end_time:
-        client_id = random.choice(list(client_rates.keys()))
-        message_type = random.choice(["Non sessional", "Sessional receive", "Sessional send"])
+class RateLimitHelper(IRateLimitHelper):
 
+    def helper(self, limiter, client_id, message_type):
         if limiter.can_send(client_id, message_type):
             limiter.add_request(client_id, message_type)
             print(f"Sent message for Client {client_id} - {message_type}")
@@ -28,8 +21,3 @@ def simulate():
                 print(f"Rate limit reached for Client {client_id} - {message_type}")
 
         print_queue_status(limiter, client_id)
-        time.sleep(0)  # Simulate a fraction of a second
-
-
-if __name__ == "__main__":
-    simulate()
