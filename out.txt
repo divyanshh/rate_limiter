@@ -1,0 +1,35 @@
+Sent message for Client 2 - Sessional send
+Client 2: - Sessional send: 1
+Sent message for Client 1 - Sessional send
+Client 1: - Sessional send: 1
+Sent message for Client 1 - Sessional receive
+Client 1: - Sessional send: 1 - Sessional receive: 1
+Sent message for Client 1 - Non sessional
+Client 1: - Sessional send: 1 - Sessional receive: 1 - Non sessional: 1
+Sent message for Client 2 - Non sessional
+Client 2: - Sessional send: 1 - Non sessional: 1
+Sent message for Client 2 - Sessional send
+Client 2: - Sessional send: 2 - Non sessional: 1
+Sent message for Client 2 - Sessional send
+Client 2: - Sessional send: 3 - Non sessional: 1
+Sent message for Client 2 - Sessional receive
+Client 2: - Sessional send: 3 - Non sessional: 1 - Sessional receive: 1
+Sent message for Client 2 - Non sessional
+Client 2: - Sessional send: 3 - Non sessional: 2 - Sessional receive: 1
+Sent message for Client 2 - Sessional send
+.....
+.....
+Client 2: - Sessional receive: 140 - Sessional send: 140 - Non sessional: 220
+Rate limit reached for Client 1 - Sessional receive
+Client 1: - Sessional receive: 140 - Sessional send: 140 - Non sessional: 220
+Rate limit reached for Client 1 - Non sessional
+.....
+.....
+Client 2: - Sessional receive: 10563 - Non sessional: 16555 - Sessional send: 10553
+Using rate limit from Non sessional for Client 1 - Sessional send
+Client 1: - Non sessional: 16569 - Sessional send: 10570 - Sessional receive: 10557
+Using rate limit from Non sessional for Client 1 - Sessional send
+Client 1: - Non sessional: 16570 - Sessional send: 10570 - Sessional receive: 10557
+Sent message for Client 1 - Sessional receive
+Client 1: - Non sessional: 16570 - Sessional send: 10570 - Sessional receive: 10558
+Using rate limit from Non sessional for Client 1 - Sessional send

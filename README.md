@@ -35,8 +35,80 @@ HLD write-up of a system that satisfies the above constraints
 A POC implementation or LLD of any critical blocks of this system
 
 
-## Solution
+# Solution 
+
+## HLD
 
 ![rate_limiter.drawio.png](rate_limiter.drawio.png)
 
 To run the code, run the simulation.py file
+
+## LLD
+
+1. rate_limiter.py - Implements rate limiter
+   1. We implement this using a sliding window of 1 second
+   2. For each client we have a dictionary of
+      1. ```json
+            {
+                "client_id": 
+                {
+                    "Non sessional": {
+                        "timestamp1": no of remaining messages,
+                        "timestamp2": no of remaining messages 
+                    }, 
+                    "Sessional receive:" {
+                        "timestamp1": no of remaining messages,
+                        "timestamp2": no of remaining messages 
+                    }, 
+                    "Sessional send": {
+                        "timestamp1": no of remaining messages,
+                        "timestamp2": no of remaining messages 
+                    }
+                }
+            }
+   3. Ideally we will save this in Redis, with the key as `<client_id>_<timestamp>_<message_type>` for easy access
+2. queues.py - We have 3 queues for each client id, each queue has its own consumers so starvation doesn't happen for any client
+3. client_rates.py - Simulates redis, has limit for each client
+   1. For more info on how we came on to these numbers refer to [numbers_crunching.xlsx](numbers_crunching.xlsx)
+4. simulation.py - Runs a simulation. See the output below:
+
+## Code output
+
+```text
+Sent message for Client 2 - Sessional send
+Client 2: - Sessional send: 1
+Sent message for Client 1 - Sessional send
+Client 1: - Sessional send: 1
+Sent message for Client 1 - Sessional receive
+Client 1: - Sessional send: 1 - Sessional receive: 1
+Sent message for Client 1 - Non sessional
+Client 1: - Sessional send: 1 - Sessional receive: 1 - Non sessional: 1
+Sent message for Client 2 - Non sessional
+Client 2: - Sessional send: 1 - Non sessional: 1
+Sent message for Client 2 - Sessional send
+Client 2: - Sessional send: 2 - Non sessional: 1
+Sent message for Client 2 - Sessional send
+Client 2: - Sessional send: 3 - Non sessional: 1
+Sent message for Client 2 - Sessional receive
+Client 2: - Sessional send: 3 - Non sessional: 1 - Sessional receive: 1
+Sent message for Client 2 - Non sessional
+Client 2: - Sessional send: 3 - Non sessional: 2 - Sessional receive: 1
+Sent message for Client 2 - Sessional send
+.....
+.....
+Client 2: - Sessional receive: 140 - Sessional send: 140 - Non sessional: 220
+Rate limit reached for Client 1 - Sessional receive
+Client 1: - Sessional receive: 140 - Sessional send: 140 - Non sessional: 220
+Rate limit reached for Client 1 - Non sessional
+.....
+.....
+Client 2: - Sessional receive: 10563 - Non sessional: 16555 - Sessional send: 10553
+Using rate limit from Non sessional for Client 1 - Sessional send
+Client 1: - Non sessional: 16569 - Sessional send: 10570 - Sessional receive: 10557
+Using rate limit from Non sessional for Client 1 - Sessional send
+Client 1: - Non sessional: 16570 - Sessional send: 10570 - Sessional receive: 10557
+Sent message for Client 1 - Sessional receive
+Client 1: - Non sessional: 16570 - Sessional send: 10570 - Sessional receive: 10558
+Using rate limit from Non sessional for Client 1 - Sessional send
+
+```
