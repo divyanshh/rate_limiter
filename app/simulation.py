@@ -17,7 +17,7 @@ def simulate(limiter: IRateLimiter, rate_limit_helper: IRateLimitHelper):
 
 
 if __name__ == "__main__":
-    # Switchable algos, if we want to switch our rate limiting algo, we just need to make a swith here
+    # Switchable algos, if we want to switch our rate limiting algo, we just need to make a switch here
     limiter = RateLimiter(client_rates)
     rate_limit_helper = RateLimitHelper()
     simulate(limiter, rate_limit_helper)
