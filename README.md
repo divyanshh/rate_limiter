@@ -53,16 +53,16 @@ To run the code, run the simulation.py file
                 "client_id": 
                 {
                     "Non sessional": {
-                        "timestamp1": no of remaining messages,
-                        "timestamp2": no of remaining messages 
+                        "timestamp1": "no of remaining messages",
+                        "timestamp2": "no of remaining messages" 
                     }, 
                     "Sessional receive:" {
-                        "timestamp1": no of remaining messages,
-                        "timestamp2": no of remaining messages 
+                        "timestamp1": "no of remaining messages",
+                        "timestamp2": "no of remaining messages" 
                     }, 
                     "Sessional send": {
-                        "timestamp1": no of remaining messages,
-                        "timestamp2": no of remaining messages 
+                        "timestamp1": "no of remaining messages",
+                        "timestamp2": "no of remaining messages" 
                     }
                 }
             }
