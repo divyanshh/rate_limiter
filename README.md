@@ -37,6 +37,6 @@ A POC implementation or LLD of any critical blocks of this system
 
 ## Solution
 
-![workhack_rate_limiter.drawio.png](workhack_rate_limiter.drawio.png)
+![rate_limiter.drawio.png](rate_limiter.drawio.png)
 
 To run the code, run the simulation.py file
